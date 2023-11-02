@@ -26,9 +26,9 @@ func ProcessReceipt(w http.ResponseWriter, r *http.Request) {
 
     // Append to the Receipt mocks
     receipt.Id = uuid.New().String()
-    data.Receipts = append(data.Receipts, receipt)
+    data.Receipts[receipt.Id] = &receipt// append(data.Receipts, receipt)
 
-    fmt.Println(data.Receipts)
+    fmt.Println(*data.Receipts[receipt.Id])
 
     receiptCreatedResponse := models.ReceiptCreatedResponse{
         Id: receipt.Id,
