@@ -10,8 +10,8 @@ var Receipts = []models.Receipt{
         PurchaseTime:   "Gopher",
         Total:   "Gopher",
         Items:   []models.Item{{
-            ShortDescription:	"Pepsi - 12-oz",
-            Price:				"1.25",
+            ShortDescription:    "Pepsi - 12-oz",
+            Price:                "1.25",
         }},
     },
 }
