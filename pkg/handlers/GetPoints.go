@@ -4,12 +4,12 @@ import (
     "encoding/json"
     "log"
     "net/http"
-    "unicode/utf8"
     "github.com/gorilla/mux"
     "strconv"
     "strings"
     "math"
     "time"
+    "regexp"
     "github.com/lukekiowski/fetchtakehome/pkg/models"
     "github.com/lukekiowski/fetchtakehome/pkg/data"
 )
@@ -60,7 +60,18 @@ func CalculatePoints(receipt models.Receipt)(int){
 
 // One point for every alphanumeric character in the retailer name.
 func CountAlphaNumChars(retailer string)(int){
-    return utf8.RuneCountInString(retailer)
+    var alphaNumericOnly = clearString(retailer)
+
+    var result = len(alphaNumericOnly)
+    log.Println(len(alphaNumericOnly))
+    log.Println("Adding", result, "points (One point for every alphanumeric character in the retailer name)")
+    return result
+}
+
+// Regex for alpha numeric characters
+var nonAlphanumericRegex = regexp.MustCompile(`[^a-zA-Z0-9]+`)
+func clearString(str string) string {
+    return nonAlphanumericRegex.ReplaceAllString(str, "")
 }
 
 // 50 points if the total is a round dollar amount with no cents.
